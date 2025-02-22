@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://i.postimg.cc/ZndtMGmB/1ee32392-fbdd-4780-af0a-0e155c6d638a.jpg');
+    background-size: cover; /* تصویر پس‌زمینه به طور کامل پوشش دهد */
+    background-position: center; /* تصویر در مرکز صفحه قرار گیرد */
+    color: white;
+}
+
+.container {
+    text-align: center;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.5); /* پس‌زمینه نیمه شفاف برای متن */
+}
+
+.logos img {
+    margin: 10px;
+    width: 100px; /* اندازه لوگوها */
+}
