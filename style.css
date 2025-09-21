@@ -1,7 +1,0 @@
-body,html{margin:0;padding:0;height:100%;background:black;color:#0f0;font-family:monospace;overflow:hidden}
-#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
-.terminal{position:relative;z-index:1;background:rgba(0,0,0,0.7);padding:20px;border:1px solid #0f0;width:600px;max-width:90%;margin:40px auto;border-radius:8px}
-#output{min-height:150px;white-space:pre-wrap}
-#command{width:100%;background:black;color:#0f0;border:none;outline:none;font-family:inherit;font-size:16px}
-#charts{position:relative;z-index:1;margin:20px auto;max-width:95%}
-canvas.chart{background:#000;border:1px solid #0f0;margin:20px 0}
