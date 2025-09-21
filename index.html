@@ -1,20 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>Matrix Crypto Terminal</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matrix BTC Live | ماتریکس بیت‌کوین زنده</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <canvas id="matrix"></canvas>
-  <div class="terminal">
-    <div id="output"></div>
-    <input id="command" type="text" placeholder="type a command... (quote, about, crypto)">
-  </div>
-  <div id="charts"></div>
+  <!-- پس‌زمینه باران کد -->
+  <canvas id="matrix-rain" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <div class="logo">
+      <span class="glitch" data-text="MATRIX">MATRIX</span>
+      <span class="accent">BTC</span>
+    </div>
+    <nav class="nav">
+      <a href="#hero">خانه</a>
+      <a href="#chart">چارت زنده</a>
+      <a href="#about">درباره</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero glass">
+      <h1>به ماتریکس بازار خوش اومدی</h1>
+      <p>چارت زنده بیت‌کوین با حس‌وحال ماتریکس. ساده، سریع، و خفن.</p>
+      <div class="cta">
+        <a class="btn primary" href="#chart">بپر داخل چارت</a>
+        <button class="btn ghost" id="toggle-rain">خاموش/روشن باران کد</button>
+      </div>
+    </section>
+
+    <section id="chart" class="chart-section glass">
+      <div class="chart-header">
+        <div class="pair">
+          <span class="dot"></span>
+          <span>BTC/USDT</span>
+          <small class="tf">1m</small>
+        </div>
+        <div class="price-wrap">
+          <span class="lbl">قیمت لحظه‌ای:</span>
+          <span id="last-price" class="price">—</span>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <canvas id="chart-canvas"></canvas>
+        <div class="hud">
+          <div class="stat"><span class="k">O</span><span id="o">—</span></div>
+          <div class="stat"><span class="k">H</span><span id="h">—</span></div>
+          <div class="stat"><span class="k">L</span><span id="l">—</span></div>
+          <div class="stat"><span class="k">C</span><span id="c">—</span></div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span class="box up"></span><span>صعودی</span>
+        <span class="box dn"></span><span>نزولی</span>
+        <span class="box wick"></span><span>شدوی کندل</span>
+      </div>
+    </section>
+
+    <section id="about" class="about glass">
+      <h2>ایده</h2>
+      <p>الهام از ماتریکس: کنتراست بالا، نئون سبز، باران کد، و مینیمالیسم. چارت روی Canvas با رندر اختصاصی کندل‌ها و گرید ماتریکسی پیاده شده.</p>
+      <ul class="features">
+        <li><strong>زنده:</strong> دریافت کندل 1 دقیقه‌ای از بایننس (WebSocket)</li>
+        <li><strong>ساده:</strong> بدون لایبرری‌های سنگین؛ فقط HTML/CSS/JS</li>
+        <li><strong>واکنش‌گرا:</strong> مقیاس‌پذیر روی موبایل و دسکتاپ</li>
+        <li><strong>قابل توسعه:</strong> اضافه‌کردن اندیکاتور یا تایم‌فریم‌ها راحت است</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot glass">
+    <span>Built in the Matrix • BTC Live</span>
+  </footer>
+
   <script src="matrix.js"></script>
-  <script src="terminal.js"></script>
-  <script src="crypto.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
