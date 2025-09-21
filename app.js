@@ -1,4 +1,4 @@
-// Matrix-styled live BTC candlestick chart (Canvas + Binance API)
+// Matrix-styled live BTC candlestick chart (Canvas + Toobit API)
 (function(){
   const canvas = document.getElementById('chart-canvas');
   const ctx = canvas.getContext('2d');
@@ -50,7 +50,6 @@
       if(k.l < minPrice) minPrice = k.l;
     }
     if (!isFinite(minPrice) || !isFinite(maxPrice)) return;
-    // add padding range
     const range = (maxPrice - minPrice) || 1;
     const pad = range * 0.05;
     minPrice -= pad; maxPrice += pad;
@@ -72,18 +71,15 @@
     ctx.save();
     ctx.strokeStyle = colors.grid;
     ctx.lineWidth = 1;
-    // horizontal lines
     const rows = 6;
     for(let i=0;i<=rows;i++){
       const y = padding.top + (i * (pxH - padding.top - padding.bottom) / rows);
       ctx.beginPath(); ctx.moveTo(padding.left, y); ctx.lineTo(pxW - padding.right, y); ctx.stroke();
-      // axis labels
       const value = maxPrice - (i * (maxPrice - minPrice) / rows);
       ctx.fillStyle = 'rgba(230,255,245,0.6)';
       ctx.font = '11px ui-monospace, monospace';
       ctx.fillText(fmt(value), pxW - padding.right + 6, y + 3);
     }
-    // vertical lines
     const cols = 12;
     for(let i=0;i<=cols;i++){
       const x = padding.left + (i * (pxW - padding.left - padding.right) / cols);
@@ -104,12 +100,10 @@
       const yH = yScale(k.h), yL = yScale(k.l);
       const up = k.c >= k.o;
 
-      // wick
       ctx.strokeStyle = colors.wick;
       ctx.lineWidth = Math.max(1, bodyW * 0.12);
       ctx.beginPath(); ctx.moveTo(x, yH); ctx.lineTo(x, yL); ctx.stroke();
 
-      // body (rounded)
       const top = Math.min(yO, yC);
       const bottom = Math.max(yO, yC);
       const h = Math.max(1, bottom - top);
@@ -124,18 +118,16 @@
     const last = candles[candles.length - 1];
     const y = yScale(last.c);
 
-    // price line
     ctx.save();
     ctx.strokeStyle = colors.lastLine;
     ctx.setLineDash([6, 6]);
     ctx.beginPath(); ctx.moveTo(padding.left, y); ctx.lineTo(pxW - padding.right, y); ctx.stroke();
     ctx.restore();
 
-    // label
     const txt = fmt(last.c);
     ctx.font = '12px ui-monospace, monospace';
     const textW = ctx.measureText(txt).width;
-    const padX = 6, padY = 3;
+    const padX = 6;
     const bx = pxW - padding.right + 4;
     const by = y - 10;
     ctx.fillStyle = colors.lastLabelBg;
@@ -147,7 +139,6 @@
     ctx.fillStyle = colors.lastLabelText;
     ctx.fillText(txt, bx + padX, by + 13);
 
-    // HUD
     lastPriceEl.textContent = txt;
     oEl.textContent = fmt(last.o);
     hEl.textContent = fmt(last.h);
@@ -175,12 +166,13 @@
     ctx.closePath();
   }
 
-  // Data: bootstrap from REST, then stream via WebSocket
+  // --- تغییر به API توبیت ---
   async function loadInitial(){
     try{
-      const url = 'https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&limit=200';
+      const url = 'https://api.toobit.com/api/v1/market/kline?symbol=BTC-USDT&interval=1m&limit=200';
       const res = await fetch(url);
-      const data = await res.json();
+      const json = await res.json();
+      const data = json.data;
       candles.length = 0;
       for(const k of data){
         candles.push({
@@ -203,44 +195,10 @@
   }
 
   function connectWS(){
-    const wsUrl = 'wss://stream.binance.com:9443/ws/btcusdt@kline_1m';
+    const wsUrl = 'wss://stream.toobit.com/market/kline?symbol=BTC-USDT&interval=1m';
     const ws = new WebSocket(wsUrl);
-    ws.onopen = () => {};
+
     ws.onmessage = (ev) => {
       try{
         const msg = JSON.parse(ev.data);
-        const k = msg.k; // kline payload
-        const t = k.t;
-        const o = +k.o, h = +k.h, l = +k.l, c = +k.c;
-        const isFinal = k.x;
-
-        const last = candles[candles.length - 1];
-        if(!last || t > last.t){
-          // new candle (still forming or just started)
-          candles.push({ t, o, h, l, c });
-          trim();
-        } else if (t === last.t){
-          // update current forming candle
-          last.h = Math.max(last.h, h);
-          last.l = Math.min(last.l, l);
-          last.c = c;
-        }
-        draw();
-
-        if(isFinal){
-          // candle closed; next messages will start a new one
-        }
-      }catch(e){
-        console.warn('WS parse error', e);
-      }
-    };
-    ws.onclose = () => {
-      // auto-reconnect with backoff
-      setTimeout(connectWS, 2000 + Math.random()*1000);
-    };
-  }
-
-  // Init
-  resize();
-  loadInitial().then(connectWS);
-})();
+        if
