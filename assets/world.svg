@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(0,255,127,0.15)"/>
+      <stop offset="100%" stop-color="rgba(0,255,127,0.05)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- زمینه/مش -->
+  <rect x="0" y="0" width="1200" height="700" fill="none" stroke="rgba(0,255,127,0.08)"/>
+  <!-- قاره‌ها (ساده‌شده) -->
+  <g fill="none" stroke="rgba(0,255,127,0.35)" stroke-width="1.2">
+    <!-- چند مسیر نمایشی -->
+    <path d="M80,350 C220,300 280,260 380,240 C520,210 620,230 700,260 C780,290 880,320 1040,300" />
+    <path d="M160,420 C280,380 340,360 420,340 C540,320 640,340 740,370 C820,390 920,430 1080,410" />
+    <path d="M200,520 C360,480 460,470 560,460 C640,450 720,460 820,480 C900,500 1000,520 1120,500" />
+  </g>
+
+  <!-- نقاط شهرها -->
+  <g>
+    <circle cx="340" cy="300" r="5" fill="#00ff7f" data-city="Berlin"/>
+    <circle cx="320" cy="340" r="5" fill="#00ff7f" data-city="Paris"/>
+    <circle cx="380" cy="360" r="5" fill="#00ff7f" data-city="Rome"/>
+    <circle cx="420" cy="300" r="5" fill="#00ff7f" data-city="Madrid"/>
+    <circle cx="260" cy="280" r="5" fill="#00ff7f" data-city="London"/>
+    <circle cx="800" cy="340" r="5" fill="#00ff7f" data-city="Tehran"/>
+    <circle cx="860" cy="360" r="5" fill="#00ff7f" data-city="Dubai"/>
+    <circle cx="940" cy="300" r="5" fill="#00ff7f" data-city="Mumbai"/>
+    <circle cx="1020" cy="340" r="5" fill="#00ff7f" data-city="Singapore"/>
+    <circle cx="1080" cy="280" r="5" fill="#00ff7f" data-city="Tokyo"/>
+    <circle cx="180" cy="480" r="5" fill="#00ff7f" data-city="New York"/>
+    <circle cx="140" cy="520" r="5" fill="#00ff7f" data-city="Mexico City"/>
+    <circle cx="260" cy="540" r="5" fill="#00ff7f" data-city="São Paulo"/>
+    <circle cx="980" cy="560" r="5" fill="#00ff7f" data-city="Sydney"/>
+    <circle cx="900" cy="500" r="5" fill="#00ff7f" data-city="Jakarta"/>
+  </g>
+
+  <!-- برچسب‌ها -->
+  <g font-family="JetBrains Mono" font-size="10" fill="rgba(200,250,204,0.85)">
+    <text x="350" y="295">Berlin</text>
+    <text x="330" y="335">Paris</text>
+    <text x="390" y="355">Rome</text>
+    <text x="430" y="295">Madrid</text>
+    <text x="270" y="275">London</text>
+    <text x="810" y="335">Tehran</text>
+    <text x="870" y="355">Dubai</text>
+    <text x="950" y="295">Mumbai</text>
+    <text x="1030" y="335">Singapore</text>
+    <text x="1090" y="275">Tokyo</text>
+    <text x="190" y="475">New York</text>
+    <text x="150" y="515">Mexico City</text>
+    <text x="270" y="535">São Paulo</text>
+    <text x="990" y="555">Sydney</text>
+    <text x="910" y="495">Jakarta</text>
+  </g>
+</svg>
